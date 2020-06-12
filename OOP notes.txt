@@ -1,0 +1,162 @@
+- Why is OOP important?
+
+
+- What is encapsulation?
+
+- What is polymorphism?
+
+- What is inheritance? How do you use it?
+
+- What is a module, and how do you use it?
+
+- How can you determine what the class is for each object?
+
+- What two things are not objects?
+
+
+- What is a class?
+class Family
+  attr_accessor :address
+
+  def initialize(family_members, address)
+    @family_members = family_members
+    @address = address
+  end
+  
+  def eat_dinner
+    puts "We are eating dinner."
+  end
+
+end
+
+turley = Family.new(%w(megan katie patrick), "Houston, TX")
+# turley.eat_dinner
+p turley.address
+turley.address = "Austin, TX"
+p turley.address
+
+# calix = Family.new(%w(francisco lilian absa), "San Pedro Sula")
+# calix.eat_dinner
+# p calix
+
+- What is the a class variable? What is a class method?
+class Family
+  attr_accessor :address
+  
+  @@amount_of_families = 0
+
+  def initialize(family_members, address)
+    @family_members = family_members
+    @address = address
+    @@amount_of_families += 1
+  end
+  
+  def eat_dinner
+    puts "We are eating dinner."
+  end
+  
+  def self.amount_of_families
+    @@amount_of_families
+  end
+
+end
+
+turley = Family.new(%w(megan katie patrick), "Houston, TX")
+
+
+calix = Family.new(%w(francisco lilian absa), "San Pedro Sula")
+p Family.amount_of_families
+p calix.amount_of_families
+
+
+- What is a module?
+module Budgetable
+  def save
+    "saving money"
+  end
+  
+  def spend
+    "spending money"
+  end
+end
+
+class Family
+  attr_accessor :address
+  
+  include Budgetable
+
+  def initialize(family_members, address)
+    @family_members = family_members
+    @address = address
+  end
+
+end
+
+class Business
+  include Budgetable
+
+end
+
+
+
+turley = Family.new(%w(megan katie patrick), "Houston, TX")
+p turley.spend
+
+apple = Business.new
+p apple.save
+
+- What is inheritance and how is it used?
+class Family
+  attr_accessor :address
+
+  def initialize(family_members, address)
+    @family_members = family_members
+    @address = address
+  end
+end
+
+class Individual < Family
+  attr_reader :hobby
+  def initialize(family_members, address, hobby)
+    super(family_members, address)
+    @hobby = hobby
+  end
+
+end
+
+turley = Family.new(%w(megan katie patrick), "Houston, TX")
+
+megan = Individual.new(%w(megan katie patrick), "Houston, TX", 'cycling')
+p megan.address
+p megan.hobby
+
+
+- Method lookup path
+module Budgetable
+  def save
+    puts "saving money"
+  end
+end
+
+module Workable
+  def work
+    puts "working"
+  end
+end
+
+class Family
+end
+
+class Individual < Family
+  include Budgetable
+  include Workable
+end
+
+turley = Family.new
+megan = Individual.new
+p Individual.ancestors
+megan.work
+
+
+
+- 

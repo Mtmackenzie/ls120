@@ -236,26 +236,6 @@ class Game
     dealer_turn
   end
 
-  def play_again?
-    answer = nil
-    loop do
-      puts "Do you want to play again? (y/n)"
-      answer = gets.chomp.downcase
-      break if ['y', 'n'].include?(answer)
-      puts "Sorry, not a valid response."
-    end
-    answer == 'y' ? true : false
-  end
-
-  def player_wins_grand_master?
-    user.points == MATCH_POINTS || dealer.points == MATCH_POINTS
-  end
-
-  def grand_master
-    return [user, 'are'] if user.points == MATCH_POINTS
-    [dealer, 'is']
-  end
-
   def dealer_turn
     if user.bust?
       dealer.points += 1
@@ -280,6 +260,26 @@ class Game
 
   def display_score
     puts "Your points: #{user.points}. Dealer points: #{dealer.points}."
+  end
+
+  def play_again?
+    answer = nil
+    loop do
+      puts "Do you want to play again? (y/n)"
+      answer = gets.chomp.downcase
+      break if ['y', 'n'].include?(answer)
+      puts "Sorry, not a valid response."
+    end
+    answer == 'y' ? true : false
+  end
+
+  def player_wins_grand_master?
+    user.points == MATCH_POINTS || dealer.points == MATCH_POINTS
+  end
+
+  def grand_master
+    return [user, 'are'] if user.points == MATCH_POINTS
+    [dealer, 'is']
   end
 
   def reset_player_totals

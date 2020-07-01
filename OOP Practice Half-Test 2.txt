@@ -1,0 +1,89 @@
+**1 What is encapsulation? How does encapsulation relate to the public interface of a class?**
+
+**2 What is duck typing? How does it relate to polymorphism - what problem does it solve?**
+
+**3 When defining a class, we usually focus on state and behaviors. What is the difference between these two concepts?**
+
+**4 What is the method lookup path?**
+
+**5 What is a collaborator object, and what is the purpose of using collaborator objects in OOP?**
+
+**6 What is an accessor method? How do you decide whether to reference an instance variable or a getter method?**
+
+**Problem 7**
+```ruby
+class GoodDog
+  attr_accessor :name, :height, :weight
+
+  def initialize(n, h, w)
+    @name = n
+    @height = h
+    @weight = w
+  end
+
+  def speak
+    "#{name} says arf!"
+  end
+
+  def change_info(n, h, w)
+    name = n
+    height = h
+    weight = w
+  end
+
+  def info
+    "#{name} weighs #{weight} and is #{height} tall."
+  end
+end
+
+sparky.change_info('Spartacus', '24 inches', '45 lbs')
+puts sparky.info      
+# => Sparky weighs 10 lbs and is 12 inches tall.
+# Why does the .change_info method not work as expected here?
+```
+
+**Problem 2**
+```ruby
+What will the following code output?
+
+class Animal
+  def initialize(name)
+    @name = name
+  end
+
+  def speak
+    puts sound
+  end
+
+  def sound
+    "#{@name} says "
+  end
+end
+
+class Cow < Animal
+  def sound
+    super + "moooooooooooo!"
+  end
+end
+
+daisy = Cow.new("Daisy")
+daisy.speak
+```
+
+**Problem 3**
+```ruby
+arr1 = [1, 2, 3]
+arr2 = [1, 2, 3]
+arr1.object_id == arr2.object_id      # => ??
+
+sym1 = :something
+sym2 = :something
+sym1.object_id == sym2.object_id      # => ??
+
+int1 = 5
+int2 = 5
+int1.object_id == int2.object_id      # => ??
+# What will the code above return and why?
+```
+**Mini program **
+Write a simplified OOP version of Battleship. See this kata to help you get started: [https://www.codewars.com/kata/58d06bfbc43d20767e000074](https://www.codewars.com/kata/58d06bfbc43d20767e000074)

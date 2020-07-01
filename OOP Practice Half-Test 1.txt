@@ -1,0 +1,100 @@
+**1 Explain how the element getter (reference) and setter methods work, and their corresponding syntactical sugar.**
+
+
+**2 In inheritance, when would it be good to override a method?**
+
+
+**3 How do objects encapsulate state?**
+
+
+**4 What is polymorphism? Explain two different ways to implement polymorphism.**
+
+
+**5 What is OOP and why is it important? What are some rules/guidelines when writing programs in OOP?**
+
+
+**6 Why use self, and how does self change depending on the scope it is used in?**
+
+
+**7 What are the scoping rules for class variables? What are the two main behaviors of class variables?**
+
+
+**Problem 1**
+```ruby
+class Person
+  def get_name
+    @name                     # the @name instance variable is not initialized anywhere
+  end
+end
+
+bob = Person.new
+bob.get_name                  # => ??
+# What is the return value, and why?
+```
+
+**Problem 2**
+```ruby
+module Swim
+  def enable_swimming
+    @can_swim = true
+  end
+end
+
+class Dog
+  include Swim
+
+  def swim
+    "swimming!" if @can_swim
+  end
+end
+
+teddy = Dog.new
+teddy.swim                                  
+# How do you get this code to return “swimming”? What does this demonstrate about instance variables?
+```
+
+**Problem 3**
+```ruby
+class Vehicle
+  @@wheels = 4
+
+  def self.wheels
+    @@wheels
+  end
+end
+
+Vehicle.wheels                              # => ??
+
+class Motorcycle < Vehicle
+  @@wheels = 2
+end
+
+Motorcycle.wheels                           # => ??
+Vehicle.wheels                              # => ??
+
+class Car < Vehicle
+end
+
+Car.wheels                                  # => ??
+# What would the above code return, and why?
+```
+
+**Problem 4**
+```ruby
+class Person
+  def initialize(name)
+    @name = name
+  end
+end
+
+class Cat
+  def initialize(name, owner)
+    @name = name
+    @owner = owner
+  end
+end
+
+sara = Person.new("Sara")
+fluffy = Cat.new("Fluffy", sara)
+# Identify all custom defined objects that act as collaborator objects within the code. 
+```
